@@ -1,0 +1,25 @@
+- hosts: all
+  become: true
+  vars: 
+    - webPage: "senthil.html"
+    - packageName: "httpd"
+    - documentDir: "/var/www/senthil"
+    - serviceName: "httpd"
+  tasks:
+        - package: 
+             name: "{{ packageName }}"
+             state: latest
+
+        - file: 
+             state: directory
+             path: "{{ documentDir }}"
+
+        - copy: 
+            src: "{{ webPage }}"
+            dest: "{{ documentDir }}"
+
+        - service:  
+            name: "{{ serviceName }}" 
+            state: started 
+            enabled: true
+
