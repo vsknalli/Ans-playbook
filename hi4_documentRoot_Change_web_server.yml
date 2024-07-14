@@ -13,6 +13,10 @@
              state: directory
              path: "{{ documentDir }}"
 
+        - copy:
+             dest: "/etc/httpd/conf.d/senthil.conf"
+             content: "DocumentRoot {{ documentDir }}\n"
+
         - copy: 
             src: "{{ webPage }}"
             dest: "{{ documentDir }}"
